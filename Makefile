@@ -4,7 +4,6 @@ DB_PASS = password
 DATABASE_NAME = users
 POSTGRES_VERSION = 16
 DATABASE_URL = "postgresql://$(DB_USER):$(DB_PASS)@localhost:$(DB_PORT)/$(DATABASE_NAME)?sslmode=disable"
-REDIS_VERSION = 7
 
 SHORT = true
 
