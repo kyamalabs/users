@@ -42,4 +42,14 @@ else
 	migrate -path internal/db/migration -database $(DATABASE_URL) -verbose down
 endif
 
-.PHONY: test db_docs db_schema postgres create_db drop_db migrate_create migrate_up migrate_down
+server:
+	go run ./cmd/users
+
+mock:
+	mockgen -package=mockdb -destination=internal/db/mock/store.go github.com/kyamalabs/users/internal/db/sqlc Store
+
+sqlc:
+	sqlc generate
+	@$(MAKE) mock
+
+.PHONY: test db_docs db_schema postgres create_db drop_db migrate_create migrate_up migrate_down server mock sqlc
