@@ -52,4 +52,11 @@ sqlc:
 	sqlc generate
 	@$(MAKE) mock
 
-.PHONY: test db_docs db_schema postgres create_db drop_db migrate_create migrate_up migrate_down server mock sqlc
+proto:
+	rm -f api/pb/*.go
+	protoc --proto_path=api/proto --go_out=api/pb --go_opt=paths=source_relative \
+	--go-grpc_out=api/pb --go-grpc_opt=paths=source_relative \
+	--grpc-gateway_out=api/pb --grpc-gateway_opt=paths=source_relative \
+	api/proto/*.proto
+
+.PHONY: test db_docs db_schema postgres create_db drop_db migrate_create migrate_up migrate_down server mock sqlc proto

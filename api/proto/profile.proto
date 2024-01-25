@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package pb;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/kyamalabs/users/pb";
+
+message Profile {
+  string wallet_address = 1;
+  string gamer_tag = 2;
+  string ens_name = 3;
+  google.protobuf.Timestamp created_at = 4;
+}
+
+// publicly accessible user profile
+message PublicProfile {
+  string wallet_address = 1;
+  string gamer_tag = 2;
+  string ens_name = 3;
+  google.protobuf.Timestamp created_at = 4;
+}
