@@ -31,7 +31,7 @@ var _ = runtime.String
 var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
-func request_Users_CreateProfile_0(ctx context.Context, marshaler runtime.Marshaler, client UsersClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_Profiles_CreateProfile_0(ctx context.Context, marshaler runtime.Marshaler, client ProfilesClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq CreateProfileRequest
 	var metadata runtime.ServerMetadata
 
@@ -48,7 +48,7 @@ func request_Users_CreateProfile_0(ctx context.Context, marshaler runtime.Marsha
 
 }
 
-func local_request_Users_CreateProfile_0(ctx context.Context, marshaler runtime.Marshaler, server UsersServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_Profiles_CreateProfile_0(ctx context.Context, marshaler runtime.Marshaler, server ProfilesServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq CreateProfileRequest
 	var metadata runtime.ServerMetadata
 
@@ -65,7 +65,7 @@ func local_request_Users_CreateProfile_0(ctx context.Context, marshaler runtime.
 
 }
 
-func request_Users_GetProfile_0(ctx context.Context, marshaler runtime.Marshaler, client UsersClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_Profiles_GetProfile_0(ctx context.Context, marshaler runtime.Marshaler, client ProfilesClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetProfileRequest
 	var metadata runtime.ServerMetadata
 
@@ -91,7 +91,7 @@ func request_Users_GetProfile_0(ctx context.Context, marshaler runtime.Marshaler
 
 }
 
-func local_request_Users_GetProfile_0(ctx context.Context, marshaler runtime.Marshaler, server UsersServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_Profiles_GetProfile_0(ctx context.Context, marshaler runtime.Marshaler, server ProfilesServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetProfileRequest
 	var metadata runtime.ServerMetadata
 
@@ -117,7 +117,7 @@ func local_request_Users_GetProfile_0(ctx context.Context, marshaler runtime.Mar
 
 }
 
-func request_Users_GetPublicProfile_0(ctx context.Context, marshaler runtime.Marshaler, client UsersClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_Profiles_GetPublicProfile_0(ctx context.Context, marshaler runtime.Marshaler, client ProfilesClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetProfileRequest
 	var metadata runtime.ServerMetadata
 
@@ -143,7 +143,7 @@ func request_Users_GetPublicProfile_0(ctx context.Context, marshaler runtime.Mar
 
 }
 
-func local_request_Users_GetPublicProfile_0(ctx context.Context, marshaler runtime.Marshaler, server UsersServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_Profiles_GetPublicProfile_0(ctx context.Context, marshaler runtime.Marshaler, server ProfilesServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetProfileRequest
 	var metadata runtime.ServerMetadata
 
@@ -170,17 +170,17 @@ func local_request_Users_GetPublicProfile_0(ctx context.Context, marshaler runti
 }
 
 var (
-	filter_Users_ListAllProfiles_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+	filter_Profiles_ListAllProfiles_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 )
 
-func request_Users_ListAllProfiles_0(ctx context.Context, marshaler runtime.Marshaler, client UsersClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_Profiles_ListAllProfiles_0(ctx context.Context, marshaler runtime.Marshaler, client ProfilesClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq ListAllProfilesRequest
 	var metadata runtime.ServerMetadata
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Users_ListAllProfiles_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Profiles_ListAllProfiles_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -189,14 +189,14 @@ func request_Users_ListAllProfiles_0(ctx context.Context, marshaler runtime.Mars
 
 }
 
-func local_request_Users_ListAllProfiles_0(ctx context.Context, marshaler runtime.Marshaler, server UsersServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_Profiles_ListAllProfiles_0(ctx context.Context, marshaler runtime.Marshaler, server ProfilesServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq ListAllProfilesRequest
 	var metadata runtime.ServerMetadata
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Users_ListAllProfiles_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Profiles_ListAllProfiles_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -205,7 +205,7 @@ func local_request_Users_ListAllProfiles_0(ctx context.Context, marshaler runtim
 
 }
 
-func request_Users_UpdateProfile_0(ctx context.Context, marshaler runtime.Marshaler, client UsersClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_Profiles_UpdateProfile_0(ctx context.Context, marshaler runtime.Marshaler, client ProfilesClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq UpdateProfileRequest
 	var metadata runtime.ServerMetadata
 
@@ -239,7 +239,7 @@ func request_Users_UpdateProfile_0(ctx context.Context, marshaler runtime.Marsha
 
 }
 
-func local_request_Users_UpdateProfile_0(ctx context.Context, marshaler runtime.Marshaler, server UsersServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_Profiles_UpdateProfile_0(ctx context.Context, marshaler runtime.Marshaler, server ProfilesServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq UpdateProfileRequest
 	var metadata runtime.ServerMetadata
 
@@ -273,7 +273,7 @@ func local_request_Users_UpdateProfile_0(ctx context.Context, marshaler runtime.
 
 }
 
-func request_Users_DeleteProfile_0(ctx context.Context, marshaler runtime.Marshaler, client UsersClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_Profiles_DeleteProfile_0(ctx context.Context, marshaler runtime.Marshaler, client ProfilesClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq DeleteProfileRequest
 	var metadata runtime.ServerMetadata
 
@@ -299,7 +299,7 @@ func request_Users_DeleteProfile_0(ctx context.Context, marshaler runtime.Marsha
 
 }
 
-func local_request_Users_DeleteProfile_0(ctx context.Context, marshaler runtime.Marshaler, server UsersServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_Profiles_DeleteProfile_0(ctx context.Context, marshaler runtime.Marshaler, server ProfilesServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq DeleteProfileRequest
 	var metadata runtime.ServerMetadata
 
@@ -325,13 +325,13 @@ func local_request_Users_DeleteProfile_0(ctx context.Context, marshaler runtime.
 
 }
 
-// RegisterUsersHandlerServer registers the http handlers for service Users to "mux".
-// UnaryRPC     :call UsersServer directly.
+// RegisterProfilesHandlerServer registers the http handlers for service Profiles to "mux".
+// UnaryRPC     :call ProfilesServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
-// Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterUsersHandlerFromEndpoint instead.
-func RegisterUsersHandlerServer(ctx context.Context, mux *runtime.ServeMux, server UsersServer) error {
+// Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterProfilesHandlerFromEndpoint instead.
+func RegisterProfilesHandlerServer(ctx context.Context, mux *runtime.ServeMux, server ProfilesServer) error {
 
-	mux.Handle("POST", pattern_Users_CreateProfile_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_Profiles_CreateProfile_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -339,12 +339,12 @@ func RegisterUsersHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Users/CreateProfile", runtime.WithHTTPPathPattern("/users/profiles"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Profiles/CreateProfile", runtime.WithHTTPPathPattern("/users/profiles"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_Users_CreateProfile_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Profiles_CreateProfile_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -352,11 +352,11 @@ func RegisterUsersHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 			return
 		}
 
-		forward_Users_CreateProfile_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Profiles_CreateProfile_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_Users_GetProfile_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Profiles_GetProfile_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -364,12 +364,12 @@ func RegisterUsersHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Users/GetProfile", runtime.WithHTTPPathPattern("/users/profiles/{wallet_address}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Profiles/GetProfile", runtime.WithHTTPPathPattern("/users/profiles/{wallet_address}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_Users_GetProfile_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Profiles_GetProfile_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -377,11 +377,11 @@ func RegisterUsersHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 			return
 		}
 
-		forward_Users_GetProfile_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Profiles_GetProfile_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_Users_GetPublicProfile_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Profiles_GetPublicProfile_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -389,12 +389,12 @@ func RegisterUsersHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Users/GetPublicProfile", runtime.WithHTTPPathPattern("/users/profiles/public/{wallet_address}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Profiles/GetPublicProfile", runtime.WithHTTPPathPattern("/users/profiles/public/{wallet_address}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_Users_GetPublicProfile_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Profiles_GetPublicProfile_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -402,11 +402,11 @@ func RegisterUsersHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 			return
 		}
 
-		forward_Users_GetPublicProfile_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Profiles_GetPublicProfile_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_Users_ListAllProfiles_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Profiles_ListAllProfiles_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -414,12 +414,12 @@ func RegisterUsersHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Users/ListAllProfiles", runtime.WithHTTPPathPattern("/users/profiles"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Profiles/ListAllProfiles", runtime.WithHTTPPathPattern("/users/profiles"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_Users_ListAllProfiles_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Profiles_ListAllProfiles_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -427,11 +427,11 @@ func RegisterUsersHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 			return
 		}
 
-		forward_Users_ListAllProfiles_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Profiles_ListAllProfiles_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("PUT", pattern_Users_UpdateProfile_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PUT", pattern_Profiles_UpdateProfile_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -439,12 +439,12 @@ func RegisterUsersHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Users/UpdateProfile", runtime.WithHTTPPathPattern("/users/profiles/{wallet_address}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Profiles/UpdateProfile", runtime.WithHTTPPathPattern("/users/profiles/{wallet_address}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_Users_UpdateProfile_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Profiles_UpdateProfile_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -452,11 +452,11 @@ func RegisterUsersHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 			return
 		}
 
-		forward_Users_UpdateProfile_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Profiles_UpdateProfile_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("DELETE", pattern_Users_DeleteProfile_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("DELETE", pattern_Profiles_DeleteProfile_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -464,12 +464,12 @@ func RegisterUsersHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Users/DeleteProfile", runtime.WithHTTPPathPattern("/users/profiles/{wallet_address}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Profiles/DeleteProfile", runtime.WithHTTPPathPattern("/users/profiles/{wallet_address}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_Users_DeleteProfile_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Profiles_DeleteProfile_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -477,16 +477,16 @@ func RegisterUsersHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 			return
 		}
 
-		forward_Users_DeleteProfile_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Profiles_DeleteProfile_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
 	return nil
 }
 
-// RegisterUsersHandlerFromEndpoint is same as RegisterUsersHandler but
+// RegisterProfilesHandlerFromEndpoint is same as RegisterProfilesHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
-func RegisterUsersHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
+func RegisterProfilesHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
 	conn, err := grpc.DialContext(ctx, endpoint, opts...)
 	if err != nil {
 		return err
@@ -506,151 +506,151 @@ func RegisterUsersHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux
 		}()
 	}()
 
-	return RegisterUsersHandler(ctx, mux, conn)
+	return RegisterProfilesHandler(ctx, mux, conn)
 }
 
-// RegisterUsersHandler registers the http handlers for service Users to "mux".
+// RegisterProfilesHandler registers the http handlers for service Profiles to "mux".
 // The handlers forward requests to the grpc endpoint over "conn".
-func RegisterUsersHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
-	return RegisterUsersHandlerClient(ctx, mux, NewUsersClient(conn))
+func RegisterProfilesHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
+	return RegisterProfilesHandlerClient(ctx, mux, NewProfilesClient(conn))
 }
 
-// RegisterUsersHandlerClient registers the http handlers for service Users
-// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "UsersClient".
-// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "UsersClient"
+// RegisterProfilesHandlerClient registers the http handlers for service Profiles
+// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "ProfilesClient".
+// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "ProfilesClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-// "UsersClient" to call the correct interceptors.
-func RegisterUsersHandlerClient(ctx context.Context, mux *runtime.ServeMux, client UsersClient) error {
+// "ProfilesClient" to call the correct interceptors.
+func RegisterProfilesHandlerClient(ctx context.Context, mux *runtime.ServeMux, client ProfilesClient) error {
 
-	mux.Handle("POST", pattern_Users_CreateProfile_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_Profiles_CreateProfile_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Users/CreateProfile", runtime.WithHTTPPathPattern("/users/profiles"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Profiles/CreateProfile", runtime.WithHTTPPathPattern("/users/profiles"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Users_CreateProfile_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Profiles_CreateProfile_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Users_CreateProfile_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Profiles_CreateProfile_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_Users_GetProfile_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Profiles_GetProfile_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Users/GetProfile", runtime.WithHTTPPathPattern("/users/profiles/{wallet_address}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Profiles/GetProfile", runtime.WithHTTPPathPattern("/users/profiles/{wallet_address}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Users_GetProfile_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Profiles_GetProfile_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Users_GetProfile_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Profiles_GetProfile_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_Users_GetPublicProfile_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Profiles_GetPublicProfile_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Users/GetPublicProfile", runtime.WithHTTPPathPattern("/users/profiles/public/{wallet_address}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Profiles/GetPublicProfile", runtime.WithHTTPPathPattern("/users/profiles/public/{wallet_address}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Users_GetPublicProfile_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Profiles_GetPublicProfile_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Users_GetPublicProfile_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Profiles_GetPublicProfile_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_Users_ListAllProfiles_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Profiles_ListAllProfiles_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Users/ListAllProfiles", runtime.WithHTTPPathPattern("/users/profiles"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Profiles/ListAllProfiles", runtime.WithHTTPPathPattern("/users/profiles"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Users_ListAllProfiles_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Profiles_ListAllProfiles_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Users_ListAllProfiles_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Profiles_ListAllProfiles_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("PUT", pattern_Users_UpdateProfile_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PUT", pattern_Profiles_UpdateProfile_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Users/UpdateProfile", runtime.WithHTTPPathPattern("/users/profiles/{wallet_address}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Profiles/UpdateProfile", runtime.WithHTTPPathPattern("/users/profiles/{wallet_address}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Users_UpdateProfile_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Profiles_UpdateProfile_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Users_UpdateProfile_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Profiles_UpdateProfile_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("DELETE", pattern_Users_DeleteProfile_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("DELETE", pattern_Profiles_DeleteProfile_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Users/DeleteProfile", runtime.WithHTTPPathPattern("/users/profiles/{wallet_address}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Profiles/DeleteProfile", runtime.WithHTTPPathPattern("/users/profiles/{wallet_address}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Users_DeleteProfile_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Profiles_DeleteProfile_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Users_DeleteProfile_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Profiles_DeleteProfile_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -658,29 +658,29 @@ func RegisterUsersHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 }
 
 var (
-	pattern_Users_CreateProfile_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"users", "profiles"}, ""))
+	pattern_Profiles_CreateProfile_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"users", "profiles"}, ""))
 
-	pattern_Users_GetProfile_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"users", "profiles", "wallet_address"}, ""))
+	pattern_Profiles_GetProfile_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"users", "profiles", "wallet_address"}, ""))
 
-	pattern_Users_GetPublicProfile_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"users", "profiles", "public", "wallet_address"}, ""))
+	pattern_Profiles_GetPublicProfile_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"users", "profiles", "public", "wallet_address"}, ""))
 
-	pattern_Users_ListAllProfiles_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"users", "profiles"}, ""))
+	pattern_Profiles_ListAllProfiles_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"users", "profiles"}, ""))
 
-	pattern_Users_UpdateProfile_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"users", "profiles", "wallet_address"}, ""))
+	pattern_Profiles_UpdateProfile_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"users", "profiles", "wallet_address"}, ""))
 
-	pattern_Users_DeleteProfile_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"users", "profiles", "wallet_address"}, ""))
+	pattern_Profiles_DeleteProfile_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"users", "profiles", "wallet_address"}, ""))
 )
 
 var (
-	forward_Users_CreateProfile_0 = runtime.ForwardResponseMessage
+	forward_Profiles_CreateProfile_0 = runtime.ForwardResponseMessage
 
-	forward_Users_GetProfile_0 = runtime.ForwardResponseMessage
+	forward_Profiles_GetProfile_0 = runtime.ForwardResponseMessage
 
-	forward_Users_GetPublicProfile_0 = runtime.ForwardResponseMessage
+	forward_Profiles_GetPublicProfile_0 = runtime.ForwardResponseMessage
 
-	forward_Users_ListAllProfiles_0 = runtime.ForwardResponseMessage
+	forward_Profiles_ListAllProfiles_0 = runtime.ForwardResponseMessage
 
-	forward_Users_UpdateProfile_0 = runtime.ForwardResponseMessage
+	forward_Profiles_UpdateProfile_0 = runtime.ForwardResponseMessage
 
-	forward_Users_DeleteProfile_0 = runtime.ForwardResponseMessage
+	forward_Profiles_DeleteProfile_0 = runtime.ForwardResponseMessage
 )

@@ -41,7 +41,7 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
   };
 };
 
-service Users {
+service Profiles {
   rpc CreateProfile(CreateProfileRequest) returns (CreateProfileResponse) {
     option (google.api.http) = {
       post: "/users/profiles"
