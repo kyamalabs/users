@@ -7,6 +7,10 @@ import (
 	"os"
 	"time"
 
+	authMiddleware "github.com/kyamalabs/auth/pkg/middleware"
+	"github.com/kyamalabs/users/internal/api/middleware"
+	"github.com/kyamalabs/users/internal/cache"
+
 	"github.com/kyamalabs/users/internal/constants"
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
@@ -45,8 +49,13 @@ func main() {
 	}
 	store := db.NewStore(connPool)
 
-	go runGatewayServer(config, store)
-	runGrpcServer(config, store)
+	redisCache, err := cache.NewRedisCache(config.RedisConnURL)
+	if err != nil {
+		log.Fatal().Err(err).Msg("cannot create redis cache")
+	}
+
+	go runGatewayServer(config, store, redisCache)
+	runGrpcServer(config, store, redisCache)
 }
 
 func setupLogger(config util.Config) {
@@ -74,13 +83,21 @@ func runDBMigration(migrationURL string, dbSource string) {
 	log.Info().Msg("db migrated successfully")
 }
 
-func runGrpcServer(config util.Config, store db.Store) {
+func runGrpcServer(config util.Config, store db.Store, cache cache.Cache) {
 	s, err := server.NewServer(config, store)
 	if err != nil {
 		log.Fatal().Err(err).Msg("cannot create server")
 	}
 
-	grpcInterceptor := grpc.ChainUnaryInterceptor()
+	grpcInterceptor := grpc.ChainUnaryInterceptor(
+		middleware.GrpcExtractMetadata,
+		(&authMiddleware.AuthenticateServiceConfig{
+			Cache:                 cache,
+			ServiceAuthPublicKeys: config.ServiceAuthPublicKeys,
+		}).AuthenticateServiceGrpc,
+		middleware.GrpcRateLimiter,
+		middleware.GrpcLogger,
+	)
 
 	grpcServer := grpc.NewServer(grpcInterceptor)
 	pb.RegisterProfilesServer(grpcServer, s.ProfileHandler)
@@ -98,7 +115,7 @@ func runGrpcServer(config util.Config, store db.Store) {
 	}
 }
 
-func runGatewayServer(config util.Config, store db.Store) {
+func runGatewayServer(config util.Config, store db.Store, cache cache.Cache) {
 	s, err := server.NewServer(config, store)
 	if err != nil {
 		log.Fatal().Err(err).Msg("cannot create server")
@@ -133,8 +150,16 @@ func runGatewayServer(config util.Config, store db.Store) {
 	swaggerHandler := http.StripPrefix("/swagger/", http.FileServer(statikFS))
 	mux.Handle("/swagger/", swaggerHandler)
 
+	handler := middleware.HTTPLogger(mux)
+	handler = middleware.HTTPRateLimiter(handler)
+	handler = authMiddleware.AuthenticateServiceHTTP(handler, &authMiddleware.AuthenticateServiceConfig{
+		Cache:                 cache,
+		ServiceAuthPublicKeys: config.ServiceAuthPublicKeys,
+	})
+	handler = middleware.HTTPExtractMetadata(handler)
+
 	srv := &http.Server{
-		Handler:      mux,
+		Handler:      handler,
 		ReadTimeout:  10 * time.Second,
 		WriteTimeout: 10 * time.Second,
 		IdleTimeout:  120 * time.Second,
