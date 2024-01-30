@@ -6,6 +6,8 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/kyamalabs/users/internal/constants"
+
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc/metadata"
 )
@@ -25,7 +27,7 @@ func TestGrpcExtractMetadata(t *testing.T) {
 		},
 		{
 			name:        "set x-service-authentication header",
-			ctx:         metadata.NewIncomingContext(context.Background(), metadata.Pairs(xServiceAuthenticationHeader, "some service auth header")),
+			ctx:         metadata.NewIncomingContext(context.Background(), metadata.Pairs(constants.XServiceAuthenticationHeader, "some service auth header")),
 			ctxKey:      ServiceAuthentication,
 			expectedCtx: context.WithValue(context.Background(), ServiceAuthentication, "some service auth header"),
 		},
@@ -61,7 +63,7 @@ func TestHTTPExtractMetadata(t *testing.T) {
 		{
 			name: "set x-service-authentication header",
 			headers: map[string]string{
-				xServiceAuthenticationHeader: "some service auth header",
+				constants.XServiceAuthenticationHeader: "some service auth header",
 			},
 			expectedServiceAuthentication: "some service auth header",
 		},

@@ -7,6 +7,8 @@ import (
 	"os"
 	"time"
 
+	"github.com/kyamalabs/users/internal/constants"
+
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/kyamalabs/users/api/pb"
 	"github.com/kyamalabs/users/internal/api/server"
@@ -54,7 +56,7 @@ func setupLogger(config util.Config) {
 		logger = logger.Output(zerolog.ConsoleWriter{Out: os.Stderr})
 	}
 
-	logger = logger.With().Str("service", "users").Logger()
+	logger = logger.With().Str("service", constants.ServiceName).Logger()
 	log.Logger = logger
 }
 

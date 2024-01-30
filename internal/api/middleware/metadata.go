@@ -4,6 +4,8 @@ import (
 	"context"
 	"net/http"
 
+	"github.com/kyamalabs/users/internal/constants"
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 )
@@ -16,7 +18,7 @@ func GrpcExtractMetadata(ctx context.Context, req any, _ *grpc.UnaryServerInfo, 
 			ctx = context.WithValue(ctx, ClientIP, clientIPs[0])
 		}
 
-		serviceAuthentications := md.Get(xServiceAuthenticationHeader)
+		serviceAuthentications := md.Get(constants.XServiceAuthenticationHeader)
 		if len(serviceAuthentications) > 0 {
 			ctx = context.WithValue(ctx, ServiceAuthentication, serviceAuthentications[0])
 		}
@@ -33,7 +35,7 @@ func HTTPExtractMetadata(handler http.Handler) http.Handler {
 			req = req.WithContext(context.WithValue(req.Context(), ClientIP, xForwardedForHeaderVal))
 		}
 
-		if xServiceAuthenticationHeaderVal := req.Header.Get(xServiceAuthenticationHeader); xServiceAuthenticationHeaderVal != "" {
+		if xServiceAuthenticationHeaderVal := req.Header.Get(constants.XServiceAuthenticationHeader); xServiceAuthenticationHeaderVal != "" {
 			req = req.WithContext(context.WithValue(req.Context(), ServiceAuthentication, xServiceAuthenticationHeaderVal))
 		}
 

@@ -2,10 +2,9 @@ package middleware
 
 // Headers
 const (
-	contentTypeHeader            = "Content-Type"
-	applicationJSONValue         = "application/json"
-	xForwardedForHeader          = "x-forwarded-for"
-	xServiceAuthenticationHeader = "x-service-authentication"
+	contentTypeHeader    = "Content-Type"
+	applicationJSONValue = "application/json"
+	xForwardedForHeader  = "x-forwarded-for"
 )
 
 // Errors
