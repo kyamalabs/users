@@ -4,6 +4,7 @@ DB_PASS = password
 DATABASE_NAME = users
 POSTGRES_VERSION = 16
 DATABASE_URL = "postgresql://$(DB_USER):$(DB_PASS)@localhost:$(DB_PORT)/$(DATABASE_NAME)?sslmode=disable"
+REDIS_VERSION = 7
 
 SHORT = true
 
@@ -64,4 +65,7 @@ proto:
 	api/proto/*.proto
 	statik -src=./docs/swagger -dest=./docs
 
-.PHONY: test db_docs db_schema postgres create_db drop_db migrate_create migrate_up migrate_down server mock sqlc proto
+redis:
+	docker run --name redis -p 6379:6379 -d redis:$(REDIS_VERSION)-alpine
+
+.PHONY: test db_docs db_schema postgres create_db drop_db migrate_create migrate_up migrate_down server mock sqlc proto redis
