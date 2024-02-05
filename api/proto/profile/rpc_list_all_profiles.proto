@@ -14,6 +14,6 @@ message ListAllProfilesRequest {
 message ListAllProfilesResponse {
   int32 page = 1;
   int32 page_size = 2;
-  int64 total_profiles = 3;
+  int32 total_profiles = 3;
   repeated PublicProfile profiles = 4;
 }

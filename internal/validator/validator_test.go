@@ -87,3 +87,34 @@ func TestValidateGamerTag(t *testing.T) {
 		})
 	}
 }
+
+func TestValidatePageSize(t *testing.T) {
+	testCases := []struct {
+		name            string
+		pageSize        int32
+		expectedToError bool
+	}{
+		{
+			name:            "success",
+			pageSize:        50,
+			expectedToError: false,
+		},
+		{
+			name:            "too large",
+			pageSize:        55,
+			expectedToError: true,
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			err := ValidatePageSize(tc.pageSize)
+			if tc.expectedToError {
+				require.Error(t, err)
+				return
+			}
+
+			require.NoError(t, err)
+		})
+	}
+}

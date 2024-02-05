@@ -10,9 +10,10 @@ import (
 )
 
 const (
-	gamerTagMinLength    = 3
-	gamerTagMaxLength    = 20
-	gamerTagRegexPattern = "^[a-zA-Z0-9_]+$"
+	gamerTagMinLength          = 3
+	gamerTagMaxLength          = 20
+	gamerTagRegexPattern       = "^[a-zA-Z0-9_]+$"
+	maxPageSize          int32 = 50
 )
 
 func ValidateWalletAddress(walletAddress string) error {
@@ -45,6 +46,14 @@ func ValidateGamerTag(gamerTag string) error {
 	re := regexp.MustCompile(gamerTagRegexPattern)
 	if !re.MatchString(gamerTag) {
 		return errors.New("can only contain alphanumeric characters and underscores")
+	}
+
+	return nil
+}
+
+func ValidatePageSize(pageSize int32) error {
+	if pageSize > maxPageSize {
+		return fmt.Errorf("must not be greater than %d", maxPageSize)
 	}
 
 	return nil

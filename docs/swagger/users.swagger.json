@@ -281,8 +281,8 @@
           "format": "int32"
         },
         "totalProfiles": {
-          "type": "string",
-          "format": "int64"
+          "type": "integer",
+          "format": "int32"
         },
         "profiles": {
           "type": "array",

@@ -145,7 +145,8 @@ func runGatewayServer(config util.Config, store db.Store, cache cache.Cache, tas
 
 	opt := runtime.WithMarshalerOption(runtime.MIMEWildcard, &runtime.JSONPb{
 		MarshalOptions: protojson.MarshalOptions{
-			UseProtoNames: true,
+			EmitDefaultValues: true,
+			UseProtoNames:     true,
 		},
 		UnmarshalOptions: protojson.UnmarshalOptions{
 			DiscardUnknown: true,
