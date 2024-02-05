@@ -10,6 +10,7 @@ type Config struct {
 	DBSource                     string   `mapstructure:"DB_SOURCE"`
 	RedisConnURL                 string   `mapstructure:"REDIS_CONN_URL"`
 	DBMigrationURL               string   `mapstructure:"DB_MIGRATION_URL"`
+	EthereumRPCURL               string   `mapstructure:"ETHEREUM_RPC_URL"`
 	HTTPServerAddress            string   `mapstructure:"HTTP_SERVER_ADDRESS"`
 	GRPCServerAddress            string   `mapstructure:"GRPC_SERVER_ADDRESS"`
 	AuthServiceGRPCServerAddress string   `mapstructure:"AUTH_SERVICE_GRPC_SERVER_ADDRESS"`

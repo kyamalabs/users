@@ -55,6 +55,21 @@ func (mr *MockStoreMockRecorder) CreateProfile(arg0, arg1 any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateProfile", reflect.TypeOf((*MockStore)(nil).CreateProfile), arg0, arg1)
 }
 
+// CreateProfileTx mocks base method.
+func (m *MockStore) CreateProfileTx(arg0 context.Context, arg1 db.CreateProfileTxParams) (db.CreateProfileTxResult, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateProfileTx", arg0, arg1)
+	ret0, _ := ret[0].(db.CreateProfileTxResult)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateProfileTx indicates an expected call of CreateProfileTx.
+func (mr *MockStoreMockRecorder) CreateProfileTx(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateProfileTx", reflect.TypeOf((*MockStore)(nil).CreateProfileTx), arg0, arg1)
+}
+
 // DeleteProfile mocks base method.
 func (m *MockStore) DeleteProfile(arg0 context.Context, arg1 string) error {
 	m.ctrl.T.Helper()

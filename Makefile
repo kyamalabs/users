@@ -50,6 +50,8 @@ mock:
 	mockgen -package=mockdb -destination=internal/db/mock/store.go github.com/kyamalabs/users/internal/db/sqlc Store
 	mockgen -package=mockcache -destination=internal/cache/mock/cache.go github.com/kyamalabs/users/internal/cache Cache
 	mockgen -package=mockservices -destination=internal/services/mock/auth.go github.com/kyamalabs/users/internal/services AuthGrpcService
+	mockgen -package mockwk -destination=internal/worker/mock/distributor.go github.com/kyamalabs/users/internal/worker TaskDistributor
+	mockgen -package mockwk -destination=internal/worker/mock/processor.go github.com/kyamalabs/users/internal/worker TaskProcessor
 
 sqlc:
 	sqlc generate

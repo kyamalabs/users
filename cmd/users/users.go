@@ -7,6 +7,9 @@ import (
 	"os"
 	"time"
 
+	"github.com/hibiken/asynq"
+	"github.com/kyamalabs/users/internal/worker"
+
 	authMiddleware "github.com/kyamalabs/auth/pkg/middleware"
 	"github.com/kyamalabs/users/internal/api/middleware"
 	"github.com/kyamalabs/users/internal/cache"
@@ -49,13 +52,21 @@ func main() {
 	}
 	store := db.NewStore(connPool)
 
+	redisOpt, err := asynq.ParseRedisURI(config.RedisConnURL)
+	if err != nil {
+		log.Fatal().Err(err).Msg("could not parse redis connection URL")
+	}
+
+	taskDistributor := worker.NewRedisTaskDistributor(redisOpt)
+
 	redisCache, err := cache.NewRedisCache(config.RedisConnURL)
 	if err != nil {
 		log.Fatal().Err(err).Msg("cannot create redis cache")
 	}
 
-	go runGatewayServer(config, store, redisCache)
-	runGrpcServer(config, store, redisCache)
+	go runTaskProcessor(config, redisOpt, redisCache)
+	go runGatewayServer(config, store, redisCache, taskDistributor)
+	runGrpcServer(config, store, redisCache, taskDistributor)
 }
 
 func setupLogger(config util.Config) {
@@ -67,6 +78,17 @@ func setupLogger(config util.Config) {
 
 	logger = logger.With().Str("service", constants.ServiceName).Logger()
 	log.Logger = logger
+}
+
+func runTaskProcessor(config util.Config, redisOpt asynq.RedisConnOpt, redisCache cache.Cache) {
+	taskProcessor := worker.NewRedisTaskProcessor(redisOpt, config, redisCache)
+
+	err := taskProcessor.Start()
+	if err != nil {
+		log.Fatal().Err(err).Msg("failed to start task processor")
+	}
+
+	log.Info().Msg("started task processor")
 }
 
 func runDBMigration(migrationURL string, dbSource string) {
@@ -83,8 +105,8 @@ func runDBMigration(migrationURL string, dbSource string) {
 	log.Info().Msg("db migrated successfully")
 }
 
-func runGrpcServer(config util.Config, store db.Store, cache cache.Cache) {
-	s, err := server.NewServer(config, store)
+func runGrpcServer(config util.Config, store db.Store, cache cache.Cache, taskDistributor worker.TaskDistributor) {
+	s, err := server.NewServer(config, cache, store, taskDistributor)
 	if err != nil {
 		log.Fatal().Err(err).Msg("cannot create server")
 	}
@@ -100,7 +122,7 @@ func runGrpcServer(config util.Config, store db.Store, cache cache.Cache) {
 	)
 
 	grpcServer := grpc.NewServer(grpcInterceptor)
-	pb.RegisterProfilesServer(grpcServer, s.ProfileHandler)
+	pb.RegisterProfilesServer(grpcServer, &s.ProfileHandler)
 	reflection.Register(grpcServer)
 
 	listener, err := net.Listen("tcp", config.GRPCServerAddress)
@@ -115,8 +137,8 @@ func runGrpcServer(config util.Config, store db.Store, cache cache.Cache) {
 	}
 }
 
-func runGatewayServer(config util.Config, store db.Store, cache cache.Cache) {
-	s, err := server.NewServer(config, store)
+func runGatewayServer(config util.Config, store db.Store, cache cache.Cache, taskDistributor worker.TaskDistributor) {
+	s, err := server.NewServer(config, cache, store, taskDistributor)
 	if err != nil {
 		log.Fatal().Err(err).Msg("cannot create server")
 	}
@@ -134,7 +156,7 @@ func runGatewayServer(config util.Config, store db.Store, cache cache.Cache) {
 
 	ctx, cancel := context.WithCancel(context.Background())
 
-	err = pb.RegisterProfilesHandlerServer(ctx, grpcMux, s.ProfileHandler)
+	err = pb.RegisterProfilesHandlerServer(ctx, grpcMux, &s.ProfileHandler)
 	if err != nil {
 		log.Fatal().Err(err).Msg("cannot register profiles handler server")
 	}

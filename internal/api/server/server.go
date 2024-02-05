@@ -4,6 +4,10 @@ import (
 	"fmt"
 	"sync"
 
+	"github.com/kyamalabs/users/internal/cache"
+
+	"github.com/kyamalabs/users/internal/worker"
+
 	"github.com/kyamalabs/users/internal/api/middleware"
 	"github.com/ulule/limiter/v3"
 
@@ -19,7 +23,7 @@ type Server struct {
 
 var once sync.Once
 
-func NewServer(config util.Config, store db.Store) (*Server, error) {
+func NewServer(config util.Config, cache cache.Cache, store db.Store, taskDistributor worker.TaskDistributor) (*Server, error) {
 	authService, err := services.NewAuthServiceGrpcClient(config.AuthServiceGRPCServerAddress, config.ServiceAuthPrivateKeys)
 	if err != nil {
 		return nil, fmt.Errorf("could not create auth service gRPC client: %w", err)
@@ -31,7 +35,7 @@ func NewServer(config util.Config, store db.Store) (*Server, error) {
 	}
 
 	server := &Server{
-		ProfileHandler: profile.NewHandler(config, store, authService),
+		ProfileHandler: profile.NewHandler(config, cache, store, taskDistributor, authService),
 	}
 
 	return server, nil
