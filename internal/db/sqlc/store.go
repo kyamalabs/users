@@ -8,6 +8,7 @@ import (
 
 type Store interface {
 	Querier
+	GetProfileTx(ctx context.Context, params GetProfileTxParams) (GetProfileTxResult, error)
 	CreateProfileTx(ctx context.Context, params CreateProfileTxParams) (CreateProfileTxResult, error)
 }
 

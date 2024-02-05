@@ -75,7 +75,7 @@ func cacheENSName(ctx context.Context, walletAddress string, taskDistributor wor
 	opts := []asynq.Option{
 		asynq.MaxRetry(10),
 		asynq.ProcessIn(10 * time.Second),
-		asynq.Queue(worker.QueueCritical),
+		asynq.Queue(worker.QueueDefault),
 	}
 
 	return taskDistributor.DistributeTaskCacheEnsName(ctx, taskPayload, opts...)

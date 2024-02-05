@@ -99,6 +99,21 @@ func (mr *MockStoreMockRecorder) GetProfile(arg0, arg1 any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetProfile", reflect.TypeOf((*MockStore)(nil).GetProfile), arg0, arg1)
 }
 
+// GetProfileTx mocks base method.
+func (m *MockStore) GetProfileTx(arg0 context.Context, arg1 db.GetProfileTxParams) (db.GetProfileTxResult, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetProfileTx", arg0, arg1)
+	ret0, _ := ret[0].(db.GetProfileTxResult)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetProfileTx indicates an expected call of GetProfileTx.
+func (mr *MockStoreMockRecorder) GetProfileTx(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetProfileTx", reflect.TypeOf((*MockStore)(nil).GetProfileTx), arg0, arg1)
+}
+
 // GetProfilesCount mocks base method.
 func (m *MockStore) GetProfilesCount(arg0 context.Context) (int64, error) {
 	m.ctrl.T.Helper()
