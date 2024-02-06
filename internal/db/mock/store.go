@@ -158,3 +158,18 @@ func (mr *MockStoreMockRecorder) UpdateProfile(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateProfile", reflect.TypeOf((*MockStore)(nil).UpdateProfile), arg0, arg1)
 }
+
+// UpdateProfileTx mocks base method.
+func (m *MockStore) UpdateProfileTx(arg0 context.Context, arg1 db.UpdateProfileTxParams) (db.UpdateProfileTxResult, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateProfileTx", arg0, arg1)
+	ret0, _ := ret[0].(db.UpdateProfileTxResult)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateProfileTx indicates an expected call of UpdateProfileTx.
+func (mr *MockStoreMockRecorder) UpdateProfileTx(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateProfileTx", reflect.TypeOf((*MockStore)(nil).UpdateProfileTx), arg0, arg1)
+}
