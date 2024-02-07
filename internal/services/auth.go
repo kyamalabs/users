@@ -5,11 +5,12 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/kyamalabs/proto/proto/auth/pb"
+
 	"github.com/kyamalabs/auth/pkg/middleware"
 
 	"github.com/kyamalabs/users/internal/constants"
 
-	"github.com/kyamalabs/auth/api/pb"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/metadata"

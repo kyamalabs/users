@@ -6,7 +6,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/kyamalabs/auth/api/pb"
+	"github.com/kyamalabs/proto/proto/auth/pb"
+
 	"github.com/kyamalabs/users/internal/constants"
 	mockservices "github.com/kyamalabs/users/internal/services/mock"
 	"github.com/stretchr/testify/require"

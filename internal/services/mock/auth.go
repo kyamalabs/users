@@ -12,7 +12,7 @@ package mockservices
 import (
 	reflect "reflect"
 
-	pb "github.com/kyamalabs/auth/api/pb"
+	pb "github.com/kyamalabs/proto/proto/auth/pb"
 	gomock "go.uber.org/mock/gomock"
 )
 

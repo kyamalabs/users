@@ -6,9 +6,10 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/kyamalabs/proto/proto/auth/pb"
+
 	"github.com/kyamalabs/users/internal/constants"
 
-	"github.com/kyamalabs/auth/api/pb"
 	"github.com/kyamalabs/users/internal/services"
 	"google.golang.org/grpc/metadata"
 )

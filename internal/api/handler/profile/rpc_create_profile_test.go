@@ -7,8 +7,8 @@ import (
 
 	"github.com/brianvoe/gofakeit/v6"
 	"github.com/jackc/pgx/v5/pgconn"
-	authPb "github.com/kyamalabs/auth/api/pb"
 	"github.com/kyamalabs/auth/pkg/util"
+	authPb "github.com/kyamalabs/proto/proto/auth/pb"
 	"github.com/kyamalabs/users/api/pb"
 	"github.com/kyamalabs/users/internal/api/handler"
 	mockcache "github.com/kyamalabs/users/internal/cache/mock"

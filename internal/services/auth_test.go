@@ -7,7 +7,8 @@ import (
 	"net"
 	"testing"
 
-	"github.com/kyamalabs/auth/api/pb"
+	"github.com/kyamalabs/proto/proto/auth/pb"
+
 	"github.com/kyamalabs/users/internal/constants"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc"
