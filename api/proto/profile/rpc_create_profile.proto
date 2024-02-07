@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package pb;
+
+import "profile.proto";
+
+option go_package = "github.com/kyamalabs/users/pb";
+
+message CreateProfileRequest {
+  string wallet_address = 1;
+  string gamer_tag = 2;
+}
+
+message CreateProfileResponse {
+  Profile profile = 1;
+}

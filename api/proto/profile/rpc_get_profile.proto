@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package pb;
+
+import "profile.proto";
+
+option go_package = "github.com/kyamalabs/users/pb";
+
+message GetProfileRequest {
+  string wallet_address = 1;
+}
+
+message GetProfileResponse {
+  Profile profile = 1;
+}
+
+message GetPublicProfileResponse {
+  PublicProfile profile = 1;
+}

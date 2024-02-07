@@ -1,0 +1,12 @@
+Project users_service {
+  database_type: 'PostgreSQL'
+  Note: '''
+    # Users Service Database
+  '''
+}
+
+Table profiles {
+  wallet_address varchar [pk]
+  gamer_tag varchar [unique, not null]
+  created_at timestamptz [not null, default: `now()`]
+}

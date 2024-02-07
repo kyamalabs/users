@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package pb;
+
+import "profile.proto";
+
+option go_package = "github.com/kyamalabs/users/pb";
+
+message ListAllProfilesRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+}
+
+message ListAllProfilesResponse {
+  int32 page = 1;
+  int32 page_size = 2;
+  int32 total_profiles = 3;
+  repeated PublicProfile profiles = 4;
+}
