@@ -8,7 +8,7 @@ require (
 	github.com/golang-migrate/migrate/v4 v4.17.0
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.19.0
 	github.com/hibiken/asynq v0.24.1
-	github.com/jackc/pgx/v5 v5.5.2
+	github.com/jackc/pgx/v5 v5.5.3
 	github.com/kyamalabs/auth v0.2.0
 	github.com/kyamalabs/proto v0.1.1
 	github.com/rakyll/statik v0.1.7
