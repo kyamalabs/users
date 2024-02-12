@@ -10,3 +10,10 @@ Table profiles {
   gamer_tag varchar [unique, not null]
   created_at timestamptz [not null, default: `now()`]
 }
+
+Table referrals {
+  id UUID [pk, default: `gen_random_uuid()`]
+  referrer varchar [ref: > profiles.wallet_address]
+  referee varchar [ref: - profiles.wallet_address]
+  referred_at timestamptz [not null, default: `now()`]
+}

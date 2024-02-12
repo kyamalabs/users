@@ -11,6 +11,9 @@
   "tags": [
     {
       "name": "Profiles"
+    },
+    {
+      "name": "Referrals"
     }
   ],
   "consumes": [
@@ -231,6 +234,72 @@
           "Profiles"
         ]
       }
+    },
+    "/users/{walletAddress}/referer": {
+      "get": {
+        "summary": "Get User Referer",
+        "description": "Get a user's referer",
+        "operationId": "Referrals_GetReferer",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbGetRefererResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "walletAddress",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Referrals"
+        ],
+        "security": []
+      }
+    },
+    "/users/{walletAddress}/referrals": {
+      "get": {
+        "summary": "Get User Referrals",
+        "description": "Get a user's referrals",
+        "operationId": "Referrals_GetReferrals",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbGetReferralsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "walletAddress",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Referrals"
+        ],
+        "security": []
+      }
     }
   },
   "definitions": {
@@ -266,6 +335,25 @@
       "properties": {
         "profile": {
           "$ref": "#/definitions/pbPublicProfile"
+        }
+      }
+    },
+    "pbGetRefererResponse": {
+      "type": "object",
+      "properties": {
+        "referer": {
+          "type": "string"
+        }
+      }
+    },
+    "pbGetReferralsResponse": {
+      "type": "object",
+      "properties": {
+        "referrals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },

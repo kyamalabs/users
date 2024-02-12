@@ -62,11 +62,11 @@ proto:
 	rm -f docs/swagger/*.swagger.json
 	rm -rf docs/statik
 
-	protoc --proto_path=api/proto/profile --proto_path=api/proto --go_out=api/pb --go_opt=paths=source_relative \
+	protoc --proto_path=api/proto/profile --proto_path=api/proto/referral --proto_path=api/proto --go_out=api/pb --go_opt=paths=source_relative \
 	--go-grpc_out=api/pb --go-grpc_opt=paths=source_relative \
 	--grpc-gateway_out=api/pb --grpc-gateway_opt=paths=source_relative \
 	--openapiv2_out=docs/swagger --openapiv2_opt=allow_merge=true,merge_file_name=users \
-	api/proto/profile/*.proto
+	api/proto/*.proto api/proto/profile/*.proto api/proto/referral/*.proto
 
 	statik -src=./docs/swagger -dest=./docs
 

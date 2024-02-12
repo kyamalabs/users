@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package pb;
+
+import "rpc_get_referer.proto";
+import "rpc_get_referrals.proto";
+
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option go_package = "github.com/kyamalabs/users/pb";
+
+service Referrals {
+  rpc GetReferer(GetRefererRequest) returns (GetRefererResponse) {
+    option (google.api.http) = {
+      get: "/users/{wallet_address}/referer"
+    };
+
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Get a user's referer";
+      summary: "Get User Referer";
+      security: {};
+    };
+  }
+
+  rpc GetReferrals(GetReferralsRequest) returns (GetReferralsResponse) {
+    option (google.api.http) = {
+      get: "/users/{wallet_address}/referrals"
+    };
+
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Get a user's referrals";
+      summary: "Get User Referrals";
+      security: {};
+    };
+  }
+}

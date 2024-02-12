@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "github.com/kyamalabs/users/pb";
+
+message GetRefererRequest {
+  string wallet_address = 1;
+}
+
+message GetRefererResponse {
+  string referer = 1;
+}
