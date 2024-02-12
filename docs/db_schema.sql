@@ -1,6 +1,6 @@
 -- SQL dump generated using DBML (dbml-lang.org)
 -- Database: PostgreSQL
--- Generated at: 2024-02-08T06:41:27.431Z
+-- Generated at: 2024-02-12T06:51:34.561Z
 
 CREATE TABLE "profiles" (
   "wallet_address" varchar PRIMARY KEY,
@@ -10,11 +10,9 @@ CREATE TABLE "profiles" (
 
 CREATE TABLE "referrals" (
   "id" UUID PRIMARY KEY DEFAULT (gen_random_uuid()),
-  "referrer" varchar,
-  "referee" varchar,
+  "referrer" varchar NOT NULL,
+  "referee" varchar UNIQUE NOT NULL,
   "referred_at" timestamptz NOT NULL DEFAULT (now())
 );
 
 ALTER TABLE "referrals" ADD FOREIGN KEY ("referrer") REFERENCES "profiles" ("wallet_address");
-
-ALTER TABLE "profiles" ADD FOREIGN KEY ("wallet_address") REFERENCES "referrals" ("referee");

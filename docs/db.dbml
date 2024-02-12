@@ -13,7 +13,7 @@ Table profiles {
 
 Table referrals {
   id UUID [pk, default: `gen_random_uuid()`]
-  referrer varchar [ref: > profiles.wallet_address]
-  referee varchar [ref: - profiles.wallet_address]
+  referrer varchar [ref: > profiles.wallet_address, not null]
+  referee varchar [unique, not null]
   referred_at timestamptz [not null, default: `now()`]
 }

@@ -1,1 +1,2 @@
+DROP TABLE IF EXISTS referrals;
 DROP TABLE IF EXISTS profiles;

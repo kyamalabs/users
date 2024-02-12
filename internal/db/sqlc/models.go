@@ -6,10 +6,19 @@ package db
 
 import (
 	"time"
+
+	"github.com/google/uuid"
 )
 
 type Profile struct {
 	WalletAddress string    `json:"wallet_address"`
 	GamerTag      string    `json:"gamer_tag"`
 	CreatedAt     time.Time `json:"created_at"`
+}
+
+type Referral struct {
+	ID         uuid.UUID `json:"id"`
+	Referrer   string    `json:"referrer"`
+	Referee    string    `json:"referee"`
+	ReferredAt time.Time `json:"referred_at"`
 }
