@@ -137,7 +137,7 @@ func TestCreateProfileAPI(t *testing.T) {
 				store.EXPECT().
 					CreateProfileTx(gomock.Any(), gomock.Any()).
 					Times(1).
-					Return(db.CreateProfileTxResult{}, &pgconn.PgError{Code: db.UniqueViolation})
+					Return(db.CreateProfileTxResult{}, &pgconn.PgError{Code: db.UniqueViolationCode})
 			},
 			checkResponse: func(t *testing.T, res *pb.CreateProfileResponse, err error) {
 				require.Error(t, err)

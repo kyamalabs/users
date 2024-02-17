@@ -9,13 +9,13 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func createTestReferral(t *testing.T, referer Profile) Referral {
+func createTestReferral(t *testing.T, referrer Profile) Referral {
 	refereeEthereumWallet, err := util.NewEthereumWallet()
 	require.NoError(t, err)
 	require.NotEmpty(t, refereeEthereumWallet)
 
 	params := CreateReferralParams{
-		Referrer: referer.WalletAddress,
+		Referrer: referrer.WalletAddress,
 		Referee:  refereeEthereumWallet.Address,
 	}
 
@@ -24,7 +24,7 @@ func createTestReferral(t *testing.T, referer Profile) Referral {
 	require.NotEmpty(t, referral)
 
 	require.NotEmpty(t, referral.ID)
-	require.Equal(t, referral.Referrer, referer.WalletAddress)
+	require.Equal(t, referral.Referrer, referrer.WalletAddress)
 	require.Equal(t, referral.Referee, refereeEthereumWallet.Address)
 	require.NotZero(t, referral.ReferredAt)
 
@@ -39,14 +39,14 @@ func TestCreateReferral(t *testing.T) {
 	createTestReferral(t, createTestProfile(t))
 }
 
-func TestGetReferer(t *testing.T) {
+func TestGetReferrer(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping test to maintain db state")
 	}
 
 	referral := createTestReferral(t, createTestProfile(t))
 
-	fetchedReferral, err := testStore.GetReferer(context.Background(), referral.Referee)
+	fetchedReferral, err := testStore.GetReferrer(context.Background(), referral.Referee)
 	require.NoError(t, err)
 	require.NotEmpty(t, fetchedReferral)
 
@@ -61,15 +61,15 @@ func TestListReferrals(t *testing.T) {
 		t.Skip("skipping test to maintain db state")
 	}
 
-	referer := createTestProfile(t)
+	referrer := createTestProfile(t)
 	numReferralsToCreate := 4
 
 	for i := 0; i < numReferralsToCreate; i++ {
-		createTestReferral(t, referer)
+		createTestReferral(t, referrer)
 	}
 
 	params := ListReferralsParams{
-		Referrer: referer.WalletAddress,
+		Referrer: referrer.WalletAddress,
 		Limit:    int32(numReferralsToCreate),
 		Offset:   0,
 	}
@@ -80,6 +80,6 @@ func TestListReferrals(t *testing.T) {
 
 	require.Len(t, referrals, numReferralsToCreate)
 	for _, referral := range referrals {
-		require.Equal(t, referer.WalletAddress, referral.Referrer)
+		require.Equal(t, referrer.WalletAddress, referral.Referrer)
 	}
 }

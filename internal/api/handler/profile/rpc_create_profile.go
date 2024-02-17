@@ -38,6 +38,7 @@ func (h *Handler) CreateProfile(ctx context.Context, req *pb.CreateProfileReques
 			WalletAddress: req.GetWalletAddress(),
 			GamerTag:      req.GetGamerTag(),
 		},
+		Referrer: req.GetReferrer(),
 		AfterCreate: func() error {
 			return cacheENSName(ctx, req.GetWalletAddress(), h.taskDistributor)
 		},
@@ -45,13 +46,8 @@ func (h *Handler) CreateProfile(ctx context.Context, req *pb.CreateProfileReques
 
 	txResult, err := h.store.CreateProfileTx(ctx, params)
 	if err != nil {
-		if db.ErrorCode(err) == db.UniqueViolation {
-			logger.Error().Err(err).Msg("user profile already exists")
-			return nil, status.Error(codes.AlreadyExists, AlreadyExists)
-		}
-
 		logger.Error().Err(err).Msg("could not create user profile")
-		return nil, status.Error(codes.Internal, handler.InternalServerError)
+		return nil, handleCreateProfileTxError(err)
 	}
 
 	response := &pb.CreateProfileResponse{
@@ -60,11 +56,33 @@ func (h *Handler) CreateProfile(ctx context.Context, req *pb.CreateProfileReques
 			GamerTag:      txResult.Profile.GamerTag,
 			CreatedAt:     timestamppb.New(txResult.Profile.CreatedAt),
 		},
+		Referral: &pb.Referral{
+			Referrer:   txResult.Referral.Referrer,
+			Referee:    txResult.Referral.Referee,
+			ReferredAt: timestamppb.New(txResult.Referral.ReferredAt),
+		},
 	}
 
 	logger.Info().Msg("user profile created successfully")
 
 	return response, nil
+}
+
+func handleCreateProfileTxError(err error) error {
+	switch err {
+	case db.UserProfileAlreadyExistsError:
+		return status.Error(codes.AlreadyExists, AlreadyExists)
+	case db.GamerTagAlreadyInUseError:
+		return status.Error(codes.AlreadyExists, GamerTagAlreadyInUse)
+	case db.UserAlreadyReferredError:
+		return status.Error(codes.FailedPrecondition, AlreadyReferred)
+	case db.ReferrerDoesNotExistError:
+		return status.Error(codes.FailedPrecondition, ReferrerDoesNotExist)
+	case db.SelfReferralError:
+		return status.Error(codes.FailedPrecondition, SelfReferralError)
+	}
+
+	return status.Error(codes.Internal, handler.InternalServerError)
 }
 
 func cacheENSName(ctx context.Context, walletAddress string, taskDistributor worker.TaskDistributor) error {
@@ -88,6 +106,10 @@ func validateCreateProfileRequest(req *pb.CreateProfileRequest) (violations []*e
 
 	if err := validator.ValidateGamerTag(req.GetGamerTag()); err != nil {
 		violations = append(violations, handler.FieldViolation("gamer_tag", err))
+	}
+
+	if err := validator.ValidateWalletAddress(req.GetReferrer()); err != nil && req.GetReferrer() != "" {
+		violations = append(violations, handler.FieldViolation("referrer", err))
 	}
 
 	return violations

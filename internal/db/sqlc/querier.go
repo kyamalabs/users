@@ -14,7 +14,7 @@ type Querier interface {
 	DeleteProfile(ctx context.Context, walletAddress string) error
 	GetProfile(ctx context.Context, walletAddress string) (Profile, error)
 	GetProfilesCount(ctx context.Context) (int64, error)
-	GetReferer(ctx context.Context, referee string) (Referral, error)
+	GetReferrer(ctx context.Context, referee string) (Referral, error)
 	ListProfiles(ctx context.Context, arg ListProfilesParams) ([]Profile, error)
 	ListReferrals(ctx context.Context, arg ListReferralsParams) ([]Referral, error)
 	UpdateProfile(ctx context.Context, arg UpdateProfileParams) (Profile, error)

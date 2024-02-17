@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package pb;
 
+import "referral.proto";
+
 option go_package = "github.com/kyamalabs/users/pb";
 
 message GetReferralsRequest {
@@ -9,5 +11,5 @@ message GetReferralsRequest {
 }
 
 message GetReferralsResponse {
-  repeated string referrals = 1;
+  repeated Referral referrals = 1;
 }

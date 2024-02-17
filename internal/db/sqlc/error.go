@@ -7,18 +7,24 @@ import (
 	"github.com/jackc/pgx/v5/pgconn"
 )
 
-const UniqueViolation = "23505"
+const UniqueViolationCode = "23505"
 
 var RecordNotFoundError = pgx.ErrNoRows
 
-// ErrorCode returns the PostgreSQL “SQLSTATE” code for a given error if exists; otherwise "".
-// see: https://www.postgresql.org/docs/11/errcodes-appendix.html
-func ErrorCode(err error) string {
+type Error struct {
+	Code           string
+	ConstraintName string
+}
+
+func ParseError(err error) *Error {
 	var pgErr *pgconn.PgError
 
 	if errors.As(err, &pgErr) {
-		return pgErr.Code
+		return &Error{
+			Code:           pgErr.Code,
+			ConstraintName: pgErr.ConstraintName,
+		}
 	}
 
-	return ""
+	return &Error{}
 }

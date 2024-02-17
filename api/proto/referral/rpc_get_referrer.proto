@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package pb;
+
+import "referral.proto";
+
+option go_package = "github.com/kyamalabs/users/pb";
+
+message GetReferrerRequest {
+  string wallet_address = 1;
+}
+
+message GetReferrerResponse {
+  Referral referral = 1;
+}

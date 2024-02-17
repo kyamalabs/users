@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Referrals_GetReferer_FullMethodName   = "/pb.Referrals/GetReferer"
+	Referrals_GetReferrer_FullMethodName  = "/pb.Referrals/GetReferrer"
 	Referrals_GetReferrals_FullMethodName = "/pb.Referrals/GetReferrals"
 )
 
@@ -27,7 +27,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ReferralsClient interface {
-	GetReferer(ctx context.Context, in *GetRefererRequest, opts ...grpc.CallOption) (*GetRefererResponse, error)
+	GetReferrer(ctx context.Context, in *GetReferrerRequest, opts ...grpc.CallOption) (*GetReferrerResponse, error)
 	GetReferrals(ctx context.Context, in *GetReferralsRequest, opts ...grpc.CallOption) (*GetReferralsResponse, error)
 }
 
@@ -39,9 +39,9 @@ func NewReferralsClient(cc grpc.ClientConnInterface) ReferralsClient {
 	return &referralsClient{cc}
 }
 
-func (c *referralsClient) GetReferer(ctx context.Context, in *GetRefererRequest, opts ...grpc.CallOption) (*GetRefererResponse, error) {
-	out := new(GetRefererResponse)
-	err := c.cc.Invoke(ctx, Referrals_GetReferer_FullMethodName, in, out, opts...)
+func (c *referralsClient) GetReferrer(ctx context.Context, in *GetReferrerRequest, opts ...grpc.CallOption) (*GetReferrerResponse, error) {
+	out := new(GetReferrerResponse)
+	err := c.cc.Invoke(ctx, Referrals_GetReferrer_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ func (c *referralsClient) GetReferrals(ctx context.Context, in *GetReferralsRequ
 // All implementations must embed UnimplementedReferralsServer
 // for forward compatibility
 type ReferralsServer interface {
-	GetReferer(context.Context, *GetRefererRequest) (*GetRefererResponse, error)
+	GetReferrer(context.Context, *GetReferrerRequest) (*GetReferrerResponse, error)
 	GetReferrals(context.Context, *GetReferralsRequest) (*GetReferralsResponse, error)
 	mustEmbedUnimplementedReferralsServer()
 }
@@ -70,8 +70,8 @@ type ReferralsServer interface {
 type UnimplementedReferralsServer struct {
 }
 
-func (UnimplementedReferralsServer) GetReferer(context.Context, *GetRefererRequest) (*GetRefererResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetReferer not implemented")
+func (UnimplementedReferralsServer) GetReferrer(context.Context, *GetReferrerRequest) (*GetReferrerResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetReferrer not implemented")
 }
 func (UnimplementedReferralsServer) GetReferrals(context.Context, *GetReferralsRequest) (*GetReferralsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetReferrals not implemented")
@@ -89,20 +89,20 @@ func RegisterReferralsServer(s grpc.ServiceRegistrar, srv ReferralsServer) {
 	s.RegisterService(&Referrals_ServiceDesc, srv)
 }
 
-func _Referrals_GetReferer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetRefererRequest)
+func _Referrals_GetReferrer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetReferrerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ReferralsServer).GetReferer(ctx, in)
+		return srv.(ReferralsServer).GetReferrer(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Referrals_GetReferer_FullMethodName,
+		FullMethod: Referrals_GetReferrer_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReferralsServer).GetReferer(ctx, req.(*GetRefererRequest))
+		return srv.(ReferralsServer).GetReferrer(ctx, req.(*GetReferrerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -133,8 +133,8 @@ var Referrals_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*ReferralsServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetReferer",
-			Handler:    _Referrals_GetReferer_Handler,
+			MethodName: "GetReferrer",
+			Handler:    _Referrals_GetReferrer_Handler,
 		},
 		{
 			MethodName: "GetReferrals",

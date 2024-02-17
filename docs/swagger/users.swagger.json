@@ -235,16 +235,16 @@
         ]
       }
     },
-    "/users/{walletAddress}/referer": {
+    "/users/{walletAddress}/referrals": {
       "get": {
-        "summary": "Get User Referer",
-        "description": "Get a user's referer",
-        "operationId": "Referrals_GetReferer",
+        "summary": "Get User Referrals",
+        "description": "Get a user's referrals",
+        "operationId": "Referrals_GetReferrals",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbGetRefererResponse"
+              "$ref": "#/definitions/pbGetReferralsResponse"
             }
           },
           "default": {
@@ -268,16 +268,16 @@
         "security": []
       }
     },
-    "/users/{walletAddress}/referrals": {
+    "/users/{walletAddress}/referrer": {
       "get": {
-        "summary": "Get User Referrals",
-        "description": "Get a user's referrals",
-        "operationId": "Referrals_GetReferrals",
+        "summary": "Get User Referrer",
+        "description": "Get a user's referrer",
+        "operationId": "Referrals_GetReferrer",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbGetReferralsResponse"
+              "$ref": "#/definitions/pbGetReferrerResponse"
             }
           },
           "default": {
@@ -311,6 +311,9 @@
         },
         "gamerTag": {
           "type": "string"
+        },
+        "referrer": {
+          "type": "string"
         }
       }
     },
@@ -319,6 +322,9 @@
       "properties": {
         "profile": {
           "$ref": "#/definitions/pbProfile"
+        },
+        "referral": {
+          "$ref": "#/definitions/pbReferral"
         }
       }
     },
@@ -338,22 +344,23 @@
         }
       }
     },
-    "pbGetRefererResponse": {
-      "type": "object",
-      "properties": {
-        "referer": {
-          "type": "string"
-        }
-      }
-    },
     "pbGetReferralsResponse": {
       "type": "object",
       "properties": {
         "referrals": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "object",
+            "$ref": "#/definitions/pbReferral"
           }
+        }
+      }
+    },
+    "pbGetReferrerResponse": {
+      "type": "object",
+      "properties": {
+        "referral": {
+          "$ref": "#/definitions/pbReferral"
         }
       }
     },
@@ -417,6 +424,21 @@
         }
       },
       "title": "publicly accessible user profile"
+    },
+    "pbReferral": {
+      "type": "object",
+      "properties": {
+        "referrer": {
+          "type": "string"
+        },
+        "referee": {
+          "type": "string"
+        },
+        "referredAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
     },
     "pbUpdateProfileResponse": {
       "type": "object",

@@ -6,7 +6,7 @@ INSERT INTO referrals (
     $1, $2
 ) RETURNING *;
 
--- name: GetReferer :one
+-- name: GetReferrer :one
 SELECT * FROM referrals
 WHERE referee = $1
 LIMIT 1;

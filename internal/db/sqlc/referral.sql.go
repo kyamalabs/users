@@ -35,14 +35,14 @@ func (q *Queries) CreateReferral(ctx context.Context, arg CreateReferralParams) 
 	return i, err
 }
 
-const getReferer = `-- name: GetReferer :one
+const getReferrer = `-- name: GetReferrer :one
 SELECT id, referrer, referee, referred_at FROM referrals
 WHERE referee = $1
 LIMIT 1
 `
 
-func (q *Queries) GetReferer(ctx context.Context, referee string) (Referral, error) {
-	row := q.db.QueryRow(ctx, getReferer, referee)
+func (q *Queries) GetReferrer(ctx context.Context, referee string) (Referral, error) {
+	row := q.db.QueryRow(ctx, getReferrer, referee)
 	var i Referral
 	err := row.Scan(
 		&i.ID,
