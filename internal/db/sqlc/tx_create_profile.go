@@ -61,8 +61,11 @@ func (store *SQLStore) CreateProfileTx(ctx context.Context, params CreateProfile
 
 		return params.AfterCreate()
 	})
+	if err != nil {
+		return CreateProfileTxResult{}, err
+	}
 
-	return result, err
+	return result, nil
 }
 
 func createProfileReferral(ctx context.Context, q *Queries, createReferralParams CreateReferralParams) (Referral, error) {
