@@ -32,7 +32,7 @@ func TestCreateProfileTx(t *testing.T) {
 			err error)
 	}{
 		{
-			name: "create profile without referer",
+			name: "create profile without referrer",
 			buildParams: func(
 				t *testing.T,
 				newProfileEthereumWallet *util.EthereumWallet,
