@@ -123,6 +123,7 @@ func runGrpcServer(config util.Config, store db.Store, cache cache.Cache, taskDi
 
 	grpcServer := grpc.NewServer(grpcInterceptor)
 	pb.RegisterProfilesServer(grpcServer, &s.ProfileHandler)
+	pb.RegisterReferralsServer(grpcServer, &s.ReferralHandler)
 	reflection.Register(grpcServer)
 
 	listener, err := net.Listen("tcp", config.GRPCServerAddress)
@@ -160,6 +161,11 @@ func runGatewayServer(config util.Config, store db.Store, cache cache.Cache, tas
 	err = pb.RegisterProfilesHandlerServer(ctx, grpcMux, &s.ProfileHandler)
 	if err != nil {
 		log.Fatal().Err(err).Msg("cannot register profiles handler server")
+	}
+
+	err = pb.RegisterReferralsHandlerServer(ctx, grpcMux, &s.ReferralHandler)
+	if err != nil {
+		log.Fatal().Err(err).Msg("cannot register referrals handler server")
 	}
 
 	mux := http.NewServeMux()

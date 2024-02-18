@@ -144,6 +144,21 @@ func (mr *MockStoreMockRecorder) GetProfilesCount(arg0 any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetProfilesCount", reflect.TypeOf((*MockStore)(nil).GetProfilesCount), arg0)
 }
 
+// GetReferralsCount mocks base method.
+func (m *MockStore) GetReferralsCount(arg0 context.Context, arg1 string) (int64, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetReferralsCount", arg0, arg1)
+	ret0, _ := ret[0].(int64)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetReferralsCount indicates an expected call of GetReferralsCount.
+func (mr *MockStoreMockRecorder) GetReferralsCount(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetReferralsCount", reflect.TypeOf((*MockStore)(nil).GetReferralsCount), arg0, arg1)
+}
+
 // GetReferrer mocks base method.
 func (m *MockStore) GetReferrer(arg0 context.Context, arg1 string) (db.Referral, error) {
 	m.ctrl.T.Helper()

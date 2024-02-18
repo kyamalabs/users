@@ -35,6 +35,19 @@ func (q *Queries) CreateReferral(ctx context.Context, arg CreateReferralParams) 
 	return i, err
 }
 
+const getReferralsCount = `-- name: GetReferralsCount :one
+SELECT COUNT(*) as total_referrals
+FROM referrals
+WHERE referrer = $1
+`
+
+func (q *Queries) GetReferralsCount(ctx context.Context, referrer string) (int64, error) {
+	row := q.db.QueryRow(ctx, getReferralsCount, referrer)
+	var total_referrals int64
+	err := row.Scan(&total_referrals)
+	return total_referrals, err
+}
+
 const getReferrer = `-- name: GetReferrer :one
 SELECT id, referrer, referee, referred_at FROM referrals
 WHERE referee = $1

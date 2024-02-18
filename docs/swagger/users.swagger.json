@@ -237,14 +237,14 @@
     },
     "/users/{walletAddress}/referrals": {
       "get": {
-        "summary": "Get User Referrals",
-        "description": "Get a user's referrals",
-        "operationId": "Referrals_GetReferrals",
+        "summary": "List User Referrals",
+        "description": "List a user's referrals",
+        "operationId": "Referrals_ListReferrals",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbGetReferralsResponse"
+              "$ref": "#/definitions/pbListReferralsResponse"
             }
           },
           "default": {
@@ -260,6 +260,20 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "tags": [
@@ -344,18 +358,6 @@
         }
       }
     },
-    "pbGetReferralsResponse": {
-      "type": "object",
-      "properties": {
-        "referrals": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/pbReferral"
-          }
-        }
-      }
-    },
     "pbGetReferrerResponse": {
       "type": "object",
       "properties": {
@@ -384,6 +386,30 @@
           "items": {
             "type": "object",
             "$ref": "#/definitions/pbPublicProfile"
+          }
+        }
+      }
+    },
+    "pbListReferralsResponse": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalReferrals": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "referrals": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/pbReferral"
           }
         }
       }

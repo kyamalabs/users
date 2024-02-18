@@ -19,8 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Referrals_GetReferrer_FullMethodName  = "/pb.Referrals/GetReferrer"
-	Referrals_GetReferrals_FullMethodName = "/pb.Referrals/GetReferrals"
+	Referrals_GetReferrer_FullMethodName   = "/pb.Referrals/GetReferrer"
+	Referrals_ListReferrals_FullMethodName = "/pb.Referrals/ListReferrals"
 )
 
 // ReferralsClient is the client API for Referrals service.
@@ -28,7 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ReferralsClient interface {
 	GetReferrer(ctx context.Context, in *GetReferrerRequest, opts ...grpc.CallOption) (*GetReferrerResponse, error)
-	GetReferrals(ctx context.Context, in *GetReferralsRequest, opts ...grpc.CallOption) (*GetReferralsResponse, error)
+	ListReferrals(ctx context.Context, in *ListReferralsRequest, opts ...grpc.CallOption) (*ListReferralsResponse, error)
 }
 
 type referralsClient struct {
@@ -48,9 +48,9 @@ func (c *referralsClient) GetReferrer(ctx context.Context, in *GetReferrerReques
 	return out, nil
 }
 
-func (c *referralsClient) GetReferrals(ctx context.Context, in *GetReferralsRequest, opts ...grpc.CallOption) (*GetReferralsResponse, error) {
-	out := new(GetReferralsResponse)
-	err := c.cc.Invoke(ctx, Referrals_GetReferrals_FullMethodName, in, out, opts...)
+func (c *referralsClient) ListReferrals(ctx context.Context, in *ListReferralsRequest, opts ...grpc.CallOption) (*ListReferralsResponse, error) {
+	out := new(ListReferralsResponse)
+	err := c.cc.Invoke(ctx, Referrals_ListReferrals_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ func (c *referralsClient) GetReferrals(ctx context.Context, in *GetReferralsRequ
 // for forward compatibility
 type ReferralsServer interface {
 	GetReferrer(context.Context, *GetReferrerRequest) (*GetReferrerResponse, error)
-	GetReferrals(context.Context, *GetReferralsRequest) (*GetReferralsResponse, error)
+	ListReferrals(context.Context, *ListReferralsRequest) (*ListReferralsResponse, error)
 	mustEmbedUnimplementedReferralsServer()
 }
 
@@ -73,8 +73,8 @@ type UnimplementedReferralsServer struct {
 func (UnimplementedReferralsServer) GetReferrer(context.Context, *GetReferrerRequest) (*GetReferrerResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetReferrer not implemented")
 }
-func (UnimplementedReferralsServer) GetReferrals(context.Context, *GetReferralsRequest) (*GetReferralsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetReferrals not implemented")
+func (UnimplementedReferralsServer) ListReferrals(context.Context, *ListReferralsRequest) (*ListReferralsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListReferrals not implemented")
 }
 func (UnimplementedReferralsServer) mustEmbedUnimplementedReferralsServer() {}
 
@@ -107,20 +107,20 @@ func _Referrals_GetReferrer_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Referrals_GetReferrals_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetReferralsRequest)
+func _Referrals_ListReferrals_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListReferralsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ReferralsServer).GetReferrals(ctx, in)
+		return srv.(ReferralsServer).ListReferrals(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Referrals_GetReferrals_FullMethodName,
+		FullMethod: Referrals_ListReferrals_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReferralsServer).GetReferrals(ctx, req.(*GetReferralsRequest))
+		return srv.(ReferralsServer).ListReferrals(ctx, req.(*ListReferralsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -137,8 +137,8 @@ var Referrals_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Referrals_GetReferrer_Handler,
 		},
 		{
-			MethodName: "GetReferrals",
-			Handler:    _Referrals_GetReferrals_Handler,
+			MethodName: "ListReferrals",
+			Handler:    _Referrals_ListReferrals_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

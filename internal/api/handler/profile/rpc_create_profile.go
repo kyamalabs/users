@@ -4,6 +4,8 @@ import (
 	"context"
 	"time"
 
+	"github.com/kyamalabs/users/internal/api/handler/referral"
+
 	"github.com/hibiken/asynq"
 	"github.com/kyamalabs/users/internal/worker"
 
@@ -75,11 +77,11 @@ func handleCreateProfileTxError(err error) error {
 	case db.GamerTagAlreadyInUseError:
 		return status.Error(codes.AlreadyExists, GamerTagAlreadyInUse)
 	case db.UserAlreadyReferredError:
-		return status.Error(codes.FailedPrecondition, AlreadyReferred)
+		return status.Error(codes.FailedPrecondition, referral.AlreadyReferred)
 	case db.ReferrerDoesNotExistError:
-		return status.Error(codes.FailedPrecondition, ReferrerDoesNotExist)
+		return status.Error(codes.FailedPrecondition, referral.ReferrerDoesNotExist)
 	case db.SelfReferralError:
-		return status.Error(codes.FailedPrecondition, SelfReferralError)
+		return status.Error(codes.FailedPrecondition, referral.SelfReferralError)
 	}
 
 	return status.Error(codes.Internal, handler.InternalServerError)

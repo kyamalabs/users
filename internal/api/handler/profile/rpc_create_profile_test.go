@@ -5,6 +5,8 @@ import (
 	"errors"
 	"testing"
 
+	"github.com/kyamalabs/users/internal/api/handler/referral"
+
 	"github.com/brianvoe/gofakeit/v6"
 	"github.com/kyamalabs/auth/pkg/util"
 	authPb "github.com/kyamalabs/proto/proto/auth/pb"
@@ -50,7 +52,7 @@ func TestCreateProfileAPI(t *testing.T) {
 			name: "success",
 			req:  createProfileReqParams,
 			buildContext: func(t *testing.T) context.Context {
-				return newContextWithBearerToken()
+				return handler.NewContextWithBearerToken()
 			},
 			buildStubs: func(store *mockdb.MockStore, cache *mockcache.MockCache, authService *mockservices.MockAuthGrpcService, taskDistributor *mockwk.MockTaskDistributor) {
 				authService.EXPECT().
@@ -106,14 +108,14 @@ func TestCreateProfileAPI(t *testing.T) {
 				require.Empty(t, res)
 
 				expectedFieldViolations := []string{"wallet_address", "gamer_tag", "referrer"}
-				checkInvalidRequestParams(t, err, expectedFieldViolations)
+				handler.CheckInvalidRequestParams(t, err, expectedFieldViolations)
 			},
 		},
 		{
 			name: "unauthorized user",
 			req:  createProfileReqParams,
 			buildContext: func(t *testing.T) context.Context {
-				return newContextWithBearerToken()
+				return handler.NewContextWithBearerToken()
 			},
 			buildStubs: func(store *mockdb.MockStore, cache *mockcache.MockCache, authService *mockservices.MockAuthGrpcService, taskDistributor *mockwk.MockTaskDistributor) {
 				authService.EXPECT().
@@ -132,7 +134,7 @@ func TestCreateProfileAPI(t *testing.T) {
 			name: "user profile already exists",
 			req:  createProfileReqParams,
 			buildContext: func(t *testing.T) context.Context {
-				return newContextWithBearerToken()
+				return handler.NewContextWithBearerToken()
 			},
 			buildStubs: func(store *mockdb.MockStore, cache *mockcache.MockCache, authService *mockservices.MockAuthGrpcService, taskDistributor *mockwk.MockTaskDistributor) {
 				authService.EXPECT().
@@ -162,7 +164,7 @@ func TestCreateProfileAPI(t *testing.T) {
 			name: "gamer tag already in use",
 			req:  createProfileReqParams,
 			buildContext: func(t *testing.T) context.Context {
-				return newContextWithBearerToken()
+				return handler.NewContextWithBearerToken()
 			},
 			buildStubs: func(store *mockdb.MockStore, cache *mockcache.MockCache, authService *mockservices.MockAuthGrpcService, taskDistributor *mockwk.MockTaskDistributor) {
 				authService.EXPECT().
@@ -192,7 +194,7 @@ func TestCreateProfileAPI(t *testing.T) {
 			name: "user already referred",
 			req:  createProfileReqParams,
 			buildContext: func(t *testing.T) context.Context {
-				return newContextWithBearerToken()
+				return handler.NewContextWithBearerToken()
 			},
 			buildStubs: func(store *mockdb.MockStore, cache *mockcache.MockCache, authService *mockservices.MockAuthGrpcService, taskDistributor *mockwk.MockTaskDistributor) {
 				authService.EXPECT().
@@ -215,14 +217,14 @@ func TestCreateProfileAPI(t *testing.T) {
 				require.Error(t, err)
 				require.Empty(t, res)
 
-				require.ErrorContains(t, err, AlreadyReferred)
+				require.ErrorContains(t, err, referral.AlreadyReferred)
 			},
 		},
 		{
 			name: "referrer does not exist",
 			req:  createProfileReqParams,
 			buildContext: func(t *testing.T) context.Context {
-				return newContextWithBearerToken()
+				return handler.NewContextWithBearerToken()
 			},
 			buildStubs: func(store *mockdb.MockStore, cache *mockcache.MockCache, authService *mockservices.MockAuthGrpcService, taskDistributor *mockwk.MockTaskDistributor) {
 				authService.EXPECT().
@@ -245,14 +247,14 @@ func TestCreateProfileAPI(t *testing.T) {
 				require.Error(t, err)
 				require.Empty(t, res)
 
-				require.ErrorContains(t, err, ReferrerDoesNotExist)
+				require.ErrorContains(t, err, referral.ReferrerDoesNotExist)
 			},
 		},
 		{
 			name: "self referral",
 			req:  createProfileReqParams,
 			buildContext: func(t *testing.T) context.Context {
-				return newContextWithBearerToken()
+				return handler.NewContextWithBearerToken()
 			},
 			buildStubs: func(store *mockdb.MockStore, cache *mockcache.MockCache, authService *mockservices.MockAuthGrpcService, taskDistributor *mockwk.MockTaskDistributor) {
 				authService.EXPECT().
@@ -275,14 +277,14 @@ func TestCreateProfileAPI(t *testing.T) {
 				require.Error(t, err)
 				require.Empty(t, res)
 
-				require.ErrorContains(t, err, SelfReferralError)
+				require.ErrorContains(t, err, referral.SelfReferralError)
 			},
 		},
 		{
 			name: "db error",
 			req:  createProfileReqParams,
 			buildContext: func(t *testing.T) context.Context {
-				return newContextWithBearerToken()
+				return handler.NewContextWithBearerToken()
 			},
 			buildStubs: func(store *mockdb.MockStore, cache *mockcache.MockCache, authService *mockservices.MockAuthGrpcService, taskDistributor *mockwk.MockTaskDistributor) {
 				authService.EXPECT().

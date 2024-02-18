@@ -43,7 +43,7 @@ func TestGetProfileAPI(t *testing.T) {
 			name: "success",
 			req:  getProfileReqParams,
 			buildContext: func(t *testing.T) context.Context {
-				return newContextWithBearerToken()
+				return handler.NewContextWithBearerToken()
 			},
 			buildStubs: func(store *mockdb.MockStore, cache *mockcache.MockCache, authService *mockservices.MockAuthGrpcService, taskDistributor *mockwk.MockTaskDistributor) {
 				authService.EXPECT().
@@ -93,14 +93,14 @@ func TestGetProfileAPI(t *testing.T) {
 				require.Empty(t, res)
 
 				expectedFieldViolations := []string{"wallet_address"}
-				checkInvalidRequestParams(t, err, expectedFieldViolations)
+				handler.CheckInvalidRequestParams(t, err, expectedFieldViolations)
 			},
 		},
 		{
 			name: "unauthorized user",
 			req:  getProfileReqParams,
 			buildContext: func(t *testing.T) context.Context {
-				return newContextWithBearerToken()
+				return handler.NewContextWithBearerToken()
 			},
 			buildStubs: func(store *mockdb.MockStore, cache *mockcache.MockCache, authService *mockservices.MockAuthGrpcService, taskDistributor *mockwk.MockTaskDistributor) {
 				authService.EXPECT().
@@ -119,7 +119,7 @@ func TestGetProfileAPI(t *testing.T) {
 			name: "profile does not exist",
 			req:  getProfileReqParams,
 			buildContext: func(t *testing.T) context.Context {
-				return newContextWithBearerToken()
+				return handler.NewContextWithBearerToken()
 			},
 			buildStubs: func(store *mockdb.MockStore, cache *mockcache.MockCache, authService *mockservices.MockAuthGrpcService, taskDistributor *mockwk.MockTaskDistributor) {
 				authService.EXPECT().
@@ -166,7 +166,7 @@ func TestGetProfileAPI(t *testing.T) {
 					Return(db.GetProfileTxResult{}, errors.New("some db error"))
 			},
 			buildContext: func(t *testing.T) context.Context {
-				return newContextWithBearerToken()
+				return handler.NewContextWithBearerToken()
 			},
 			checkResponse: func(t *testing.T, res *pb.GetProfileResponse, err error) {
 				require.Error(t, err)

@@ -11,6 +11,11 @@ SELECT * FROM referrals
 WHERE referee = $1
 LIMIT 1;
 
+-- name: GetReferralsCount :one
+SELECT COUNT(*) as total_referrals
+FROM referrals
+WHERE referrer = $1;
+
 -- name: ListReferrals :many
 SELECT * FROM referrals
 WHERE referrer = $1

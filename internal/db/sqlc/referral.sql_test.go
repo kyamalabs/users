@@ -56,6 +56,38 @@ func TestGetReferrer(t *testing.T) {
 	require.WithinDuration(t, referral.ReferredAt, fetchedReferral.ReferredAt, time.Second)
 }
 
+func TestGetReferralsCount(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test to maintain db state")
+	}
+
+	referrer := createTestProfile(t)
+
+	initialReferralsCount, err := testStore.GetReferralsCount(context.Background(), referrer.WalletAddress)
+	require.NoError(t, err)
+	require.NotNil(t, initialReferralsCount)
+
+	numAdditionalReferrals := 4
+	for i := 0; i < numAdditionalReferrals; i++ {
+		profile := createTestProfile(t)
+		require.NotEmpty(t, profile)
+
+		referral, err := testStore.CreateReferral(context.Background(), CreateReferralParams{
+			Referrer: referrer.WalletAddress,
+			Referee:  profile.WalletAddress,
+		})
+
+		require.NotEmpty(t, referral)
+		require.NoError(t, err)
+	}
+
+	finalReferralsCount, err := testStore.GetReferralsCount(context.Background(), referrer.WalletAddress)
+	require.NoError(t, err)
+	require.NotEmpty(t, finalReferralsCount)
+
+	require.Equal(t, initialReferralsCount+int64(numAdditionalReferrals), finalReferralsCount)
+}
+
 func TestListReferrals(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping test to maintain db state")
