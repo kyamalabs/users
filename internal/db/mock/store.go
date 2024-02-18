@@ -70,6 +70,21 @@ func (mr *MockStoreMockRecorder) CreateProfileTx(arg0, arg1 any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateProfileTx", reflect.TypeOf((*MockStore)(nil).CreateProfileTx), arg0, arg1)
 }
 
+// CreateReferral mocks base method.
+func (m *MockStore) CreateReferral(arg0 context.Context, arg1 db.CreateReferralParams) (db.Referral, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateReferral", arg0, arg1)
+	ret0, _ := ret[0].(db.Referral)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateReferral indicates an expected call of CreateReferral.
+func (mr *MockStoreMockRecorder) CreateReferral(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateReferral", reflect.TypeOf((*MockStore)(nil).CreateReferral), arg0, arg1)
+}
+
 // DeleteProfile mocks base method.
 func (m *MockStore) DeleteProfile(arg0 context.Context, arg1 string) error {
 	m.ctrl.T.Helper()
@@ -129,6 +144,36 @@ func (mr *MockStoreMockRecorder) GetProfilesCount(arg0 any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetProfilesCount", reflect.TypeOf((*MockStore)(nil).GetProfilesCount), arg0)
 }
 
+// GetReferralsCount mocks base method.
+func (m *MockStore) GetReferralsCount(arg0 context.Context, arg1 string) (int64, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetReferralsCount", arg0, arg1)
+	ret0, _ := ret[0].(int64)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetReferralsCount indicates an expected call of GetReferralsCount.
+func (mr *MockStoreMockRecorder) GetReferralsCount(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetReferralsCount", reflect.TypeOf((*MockStore)(nil).GetReferralsCount), arg0, arg1)
+}
+
+// GetReferrer mocks base method.
+func (m *MockStore) GetReferrer(arg0 context.Context, arg1 string) (db.Referral, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetReferrer", arg0, arg1)
+	ret0, _ := ret[0].(db.Referral)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetReferrer indicates an expected call of GetReferrer.
+func (mr *MockStoreMockRecorder) GetReferrer(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetReferrer", reflect.TypeOf((*MockStore)(nil).GetReferrer), arg0, arg1)
+}
+
 // ListProfiles mocks base method.
 func (m *MockStore) ListProfiles(arg0 context.Context, arg1 db.ListProfilesParams) ([]db.Profile, error) {
 	m.ctrl.T.Helper()
@@ -142,6 +187,21 @@ func (m *MockStore) ListProfiles(arg0 context.Context, arg1 db.ListProfilesParam
 func (mr *MockStoreMockRecorder) ListProfiles(arg0, arg1 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListProfiles", reflect.TypeOf((*MockStore)(nil).ListProfiles), arg0, arg1)
+}
+
+// ListReferrals mocks base method.
+func (m *MockStore) ListReferrals(arg0 context.Context, arg1 db.ListReferralsParams) ([]db.Referral, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListReferrals", arg0, arg1)
+	ret0, _ := ret[0].([]db.Referral)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListReferrals indicates an expected call of ListReferrals.
+func (mr *MockStoreMockRecorder) ListReferrals(arg0, arg1 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListReferrals", reflect.TypeOf((*MockStore)(nil).ListReferrals), arg0, arg1)
 }
 
 // UpdateProfile mocks base method.

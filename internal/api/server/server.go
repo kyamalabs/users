@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"sync"
 
+	"github.com/kyamalabs/users/internal/api/handler/referral"
+
 	"github.com/kyamalabs/users/internal/cache"
 
 	"github.com/kyamalabs/users/internal/worker"
@@ -18,7 +20,8 @@ import (
 )
 
 type Server struct {
-	ProfileHandler profile.Handler
+	ProfileHandler  profile.Handler
+	ReferralHandler referral.Handler
 }
 
 var once sync.Once
@@ -35,7 +38,8 @@ func NewServer(config util.Config, cache cache.Cache, store db.Store, taskDistri
 	}
 
 	server := &Server{
-		ProfileHandler: profile.NewHandler(config, cache, store, taskDistributor, authService),
+		ProfileHandler:  profile.NewHandler(config, cache, store, taskDistributor, authService),
+		ReferralHandler: referral.NewHandler(config, store),
 	}
 
 	return server, nil

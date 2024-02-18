@@ -3,7 +3,6 @@ package middleware
 import (
 	"context"
 	"errors"
-	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -311,7 +310,6 @@ func TestHTTPRateLimiter(t *testing.T) {
 				rateLimits = initialRateLimits
 				limiters = make(map[string]*limiter.Limiter)
 			}()
-			fmt.Println(rateLimits)
 			err := InitializeLimiters(store)
 			require.NoError(t, err)
 

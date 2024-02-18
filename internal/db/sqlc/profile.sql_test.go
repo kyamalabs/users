@@ -80,7 +80,6 @@ func TestGetProfilesCount(t *testing.T) {
 	require.NotEmpty(t, finalProfilesCount)
 
 	require.Equal(t, initialProfilesCount+int64(numAdditionalProfiles), finalProfilesCount)
-	fmt.Println(finalProfilesCount)
 }
 
 func TestListProfiles(t *testing.T) {

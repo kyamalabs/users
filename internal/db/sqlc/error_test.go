@@ -10,34 +10,38 @@ import (
 
 func TestErrorCode(t *testing.T) {
 	testCases := []struct {
-		name              string
-		buildPgErr        func() error
-		expectedErrorCode string
+		name          string
+		buildPgErr    func() error
+		expectedError *Error
 	}{
 		{
 			name: "with SQLSTATE code",
 			buildPgErr: func() error {
 				return &pgconn.PgError{
-					Code: "23505",
+					Code:           "23505",
+					ConstraintName: "table_pkey",
 				}
 			},
-			expectedErrorCode: UniqueViolation,
+			expectedError: &Error{
+				Code:           UniqueViolationCode,
+				ConstraintName: "table_pkey",
+			},
 		},
 		{
 			name: "without SQLSTATE code",
 			buildPgErr: func() error {
 				return errors.New("some random error")
 			},
-			expectedErrorCode: "",
+			expectedError: &Error{},
 		},
 	}
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			pgErr := tc.buildPgErr()
-			errorCode := ErrorCode(pgErr)
+			dbError := ParseError(pgErr)
 
-			require.Equal(t, tc.expectedErrorCode, errorCode)
+			require.Equal(t, tc.expectedError, dbError)
 		})
 	}
 }

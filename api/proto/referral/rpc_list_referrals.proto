@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package pb;
+
+import "referral.proto";
+
+option go_package = "github.com/kyamalabs/users/pb";
+
+message ListReferralsRequest {
+  string wallet_address = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+}
+
+message ListReferralsResponse {
+  int32 page = 1;
+  int32 page_size = 2;
+  int32 total_referrals = 3;
+  repeated Referral referrals = 4;
+}

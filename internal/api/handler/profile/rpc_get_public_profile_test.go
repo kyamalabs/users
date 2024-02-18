@@ -42,7 +42,7 @@ func TestGetPublicProfileAPI(t *testing.T) {
 			name: "success",
 			req:  getPublicProfileReqParams,
 			buildContext: func(t *testing.T) context.Context {
-				return newContextWithBearerToken()
+				return handler.NewContextWithBearerToken()
 			},
 			buildStubs: func(store *mockdb.MockStore, cache *mockcache.MockCache, authService *mockservices.MockAuthGrpcService, taskDistributor *mockwk.MockTaskDistributor) {
 				store.EXPECT().
@@ -81,14 +81,14 @@ func TestGetPublicProfileAPI(t *testing.T) {
 				require.Empty(t, res)
 
 				expectedFieldViolations := []string{"wallet_address"}
-				checkInvalidRequestParams(t, err, expectedFieldViolations)
+				handler.CheckInvalidRequestParams(t, err, expectedFieldViolations)
 			},
 		},
 		{
 			name: "profile does not exist",
 			req:  getPublicProfileReqParams,
 			buildContext: func(t *testing.T) context.Context {
-				return newContextWithBearerToken()
+				return handler.NewContextWithBearerToken()
 			},
 			buildStubs: func(store *mockdb.MockStore, cache *mockcache.MockCache, authService *mockservices.MockAuthGrpcService, taskDistributor *mockwk.MockTaskDistributor) {
 				store.EXPECT().
@@ -107,7 +107,7 @@ func TestGetPublicProfileAPI(t *testing.T) {
 			name: "db error",
 			req:  getPublicProfileReqParams,
 			buildContext: func(t *testing.T) context.Context {
-				return newContextWithBearerToken()
+				return handler.NewContextWithBearerToken()
 			},
 			buildStubs: func(store *mockdb.MockStore, cache *mockcache.MockCache, authService *mockservices.MockAuthGrpcService, taskDistributor *mockwk.MockTaskDistributor) {
 				store.EXPECT().

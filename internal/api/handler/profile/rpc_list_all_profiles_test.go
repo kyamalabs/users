@@ -84,7 +84,7 @@ func TestListAllProfilesAPI(t *testing.T) {
 				require.Empty(t, res)
 
 				expectedFieldViolations := []string{"page_size"}
-				checkInvalidRequestParams(t, err, expectedFieldViolations)
+				handler.CheckInvalidRequestParams(t, err, expectedFieldViolations)
 			},
 		},
 		{

@@ -43,7 +43,7 @@ func TestDeleteProfileAPI(t *testing.T) {
 			name: "success",
 			req:  deleteProfileReqParams,
 			buildContext: func(t *testing.T) context.Context {
-				return newContextWithBearerToken()
+				return handler.NewContextWithBearerToken()
 			},
 			buildStubs: func(store *mockdb.MockStore, cache *mockcache.MockCache, authService *mockservices.MockAuthGrpcService, taskDistributor *mockwk.MockTaskDistributor) {
 				authService.EXPECT().
@@ -82,14 +82,14 @@ func TestDeleteProfileAPI(t *testing.T) {
 				require.Empty(t, res)
 
 				expectedFieldViolations := []string{"wallet_address"}
-				checkInvalidRequestParams(t, err, expectedFieldViolations)
+				handler.CheckInvalidRequestParams(t, err, expectedFieldViolations)
 			},
 		},
 		{
 			name: "unauthorized user",
 			req:  deleteProfileReqParams,
 			buildContext: func(t *testing.T) context.Context {
-				return newContextWithBearerToken()
+				return handler.NewContextWithBearerToken()
 			},
 			buildStubs: func(store *mockdb.MockStore, cache *mockcache.MockCache, authService *mockservices.MockAuthGrpcService, taskDistributor *mockwk.MockTaskDistributor) {
 				authService.EXPECT().
@@ -108,7 +108,7 @@ func TestDeleteProfileAPI(t *testing.T) {
 			name: "db error",
 			req:  deleteProfileReqParams,
 			buildContext: func(t *testing.T) context.Context {
-				return newContextWithBearerToken()
+				return handler.NewContextWithBearerToken()
 			},
 			buildStubs: func(store *mockdb.MockStore, cache *mockcache.MockCache, authService *mockservices.MockAuthGrpcService, taskDistributor *mockwk.MockTaskDistributor) {
 				authService.EXPECT().

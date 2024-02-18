@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package pb;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/kyamalabs/users/pb";
+
+message Referral {
+  string referrer = 1;
+  string referee = 2;
+  google.protobuf.Timestamp referred_at = 3;
+}

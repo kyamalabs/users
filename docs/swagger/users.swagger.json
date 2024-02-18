@@ -11,6 +11,9 @@
   "tags": [
     {
       "name": "Profiles"
+    },
+    {
+      "name": "Referrals"
     }
   ],
   "consumes": [
@@ -231,6 +234,86 @@
           "Profiles"
         ]
       }
+    },
+    "/users/{walletAddress}/referrals": {
+      "get": {
+        "summary": "List User Referrals",
+        "description": "List a user's referrals",
+        "operationId": "Referrals_ListReferrals",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbListReferralsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "walletAddress",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Referrals"
+        ],
+        "security": []
+      }
+    },
+    "/users/{walletAddress}/referrer": {
+      "get": {
+        "summary": "Get User Referrer",
+        "description": "Get a user's referrer",
+        "operationId": "Referrals_GetReferrer",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbGetReferrerResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "walletAddress",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Referrals"
+        ],
+        "security": []
+      }
     }
   },
   "definitions": {
@@ -242,6 +325,9 @@
         },
         "gamerTag": {
           "type": "string"
+        },
+        "referrer": {
+          "type": "string"
         }
       }
     },
@@ -250,6 +336,9 @@
       "properties": {
         "profile": {
           "$ref": "#/definitions/pbProfile"
+        },
+        "referral": {
+          "$ref": "#/definitions/pbReferral"
         }
       }
     },
@@ -266,6 +355,14 @@
       "properties": {
         "profile": {
           "$ref": "#/definitions/pbPublicProfile"
+        }
+      }
+    },
+    "pbGetReferrerResponse": {
+      "type": "object",
+      "properties": {
+        "referral": {
+          "$ref": "#/definitions/pbReferral"
         }
       }
     },
@@ -289,6 +386,30 @@
           "items": {
             "type": "object",
             "$ref": "#/definitions/pbPublicProfile"
+          }
+        }
+      }
+    },
+    "pbListReferralsResponse": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalReferrals": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "referrals": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/pbReferral"
           }
         }
       }
@@ -329,6 +450,21 @@
         }
       },
       "title": "publicly accessible user profile"
+    },
+    "pbReferral": {
+      "type": "object",
+      "properties": {
+        "referrer": {
+          "type": "string"
+        },
+        "referee": {
+          "type": "string"
+        },
+        "referredAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
     },
     "pbUpdateProfileResponse": {
       "type": "object",
