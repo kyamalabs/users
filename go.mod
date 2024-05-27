@@ -14,7 +14,7 @@ require (
 	github.com/kyamalabs/proto v0.1.2
 	github.com/rakyll/statik v0.1.7
 	github.com/redis/go-redis/v9 v9.5.1
-	github.com/rs/zerolog v1.32.0
+	github.com/rs/zerolog v1.33.0
 	github.com/spf13/viper v1.18.2
 	github.com/stretchr/testify v1.8.4
 	github.com/ulule/limiter/v3 v3.11.2
